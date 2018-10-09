@@ -32,39 +32,35 @@ languages = {
 
 def reformat_languages(languages)
   new_hash = {}
-  languages.each do |style, style_block|
-    style_block.each do |language_name, type|
+  languages.each do |style, language_with_details|
+    language_with_details.each do |language_name, type|
       new_hash[language_name] = type
     end
   end
   new_hash.each do |languageName, language_detail_hash|
-    if languageName == :python || :ruby || :java
-      language_detail_hash.store(:style, [:oo])
+  if languageName == :python || :ruby || :java
+      new_hash[languageName].store(:style, [:oo])
+    elsif languageName == :scala || :erlang || :clojure
+      new_hash[languageName].store(:style, [:functional])
+    else new_hash[languageName].store(:style, [:oo, :functional])
     end
-  end
-  new_hash[:javascript] = {
-    :type => "interpreted",
-    :style => [:oo, :functional]
-  }
-    new_hash[:erlang]= {
-    :type => "compiled",
-    :style => [:functional]
-  }
-  new_hash[:scala]= {
-    :type => "compiled",
-    :style => [:functional]
-  }
-  new_hash[:clojure]= {
-    :type => "compiled",
-    :style => [:functional]
-  }
+ end
   new_hash
 end
 
 reformat_languages(languages)
 
 
-
+x = {
+  :ruby=>{:type=>"interpreted", :style=>[:oo]}, 
+  :javascript=>{:type=>"interpreted", :style=>[:oo]},
+  :python=>{:type=>"interpreted", :style=>[:oo]},
+  :java=>{:type=>"compiled", :style=>[:oo]}, 
+  :clojure=>{:type=>"compiled", :style=>[:oo]}, 
+  :erlang=>{:type=>"compiled", :style=>[:oo]}, 
+  :scala=>{:type=>"compiled", :style=>[:oo]}
+  
+}
 
 
 
