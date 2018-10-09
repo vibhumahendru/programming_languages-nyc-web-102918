@@ -1,3 +1,4 @@
+require "pry"
 languages = {
   :oo => {
     :ruby => {
@@ -38,9 +39,9 @@ def reformat_languages(languages)
     end
   end
   new_hash.each do |languageName, language_detail_hash|
-  if languageName == :python || :ruby || :java
+  if languageName == :python || languageName == :ruby || languageName== :java
       new_hash[languageName].store(:style, [:oo])
-    elsif languageName == :scala || :erlang || :clojure
+    elsif languageName == :scala || languageName == :erlang || languageName == :clojure
       new_hash[languageName].store(:style, [:functional])
     else new_hash[languageName].store(:style, [:oo, :functional])
     end
@@ -48,19 +49,8 @@ def reformat_languages(languages)
   new_hash
 end
 
-reformat_languages(languages)
 
 
-x = {
-  :ruby=>{:type=>"interpreted", :style=>[:oo]}, 
-  :javascript=>{:type=>"interpreted", :style=>[:oo]},
-  :python=>{:type=>"interpreted", :style=>[:oo]},
-  :java=>{:type=>"compiled", :style=>[:oo]}, 
-  :clojure=>{:type=>"compiled", :style=>[:oo]}, 
-  :erlang=>{:type=>"compiled", :style=>[:oo]}, 
-  :scala=>{:type=>"compiled", :style=>[:oo]}
-  
-}
 
 
 
